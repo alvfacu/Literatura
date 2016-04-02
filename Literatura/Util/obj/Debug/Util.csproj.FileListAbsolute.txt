@@ -1,0 +1,14 @@
+E:\Literatura\Literatura\Util\bin\Debug\Util.dll
+E:\Literatura\Literatura\Util\bin\Debug\Util.pdb
+E:\Literatura\Literatura\Util\obj\Debug\ResolveAssemblyReference.cache
+E:\Literatura\Literatura\Util\obj\Debug\Util.dll
+E:\Literatura\Literatura\Util\obj\Debug\Util.pdb
+C:\Users\Facundo\Desktop\Net\Literatura\Literatura\Util\bin\Debug\Util.dll
+C:\Users\Facundo\Desktop\Net\Literatura\Literatura\Util\bin\Debug\Util.pdb
+C:\Users\Facundo\Desktop\Net\Literatura\Literatura\Util\obj\Debug\Util.dll
+C:\Users\Facundo\Desktop\Net\Literatura\Literatura\Util\obj\Debug\Util.pdb
+C:\Users\Facundo\Documents\NET\Literatura\Literatura\Util\bin\Debug\Util.dll.config
+C:\Users\Facundo\Documents\NET\Literatura\Literatura\Util\bin\Debug\Util.dll
+C:\Users\Facundo\Documents\NET\Literatura\Literatura\Util\bin\Debug\Util.pdb
+C:\Users\Facundo\Documents\NET\Literatura\Literatura\Util\obj\Debug\Util.dll
+C:\Users\Facundo\Documents\NET\Literatura\Literatura\Util\obj\Debug\Util.pdb
