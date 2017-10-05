@@ -22,14 +22,14 @@ namespace Negocio
             set { _LibroData = value; }
         }
 
-        public List<Libros> GetAll()
+        public List<Libros> GetAll(int idUsr)
         {
-            return LibroData.GetAll();
+            return LibroData.GetAll(idUsr);
         }
 
-        public Libros GetOne(int ID)
+        public Libros GetOne(int ID, int idUsr)
         {
-            return LibroData.GetOne(ID);
+            return LibroData.GetOne(ID, idUsr);
         }
 
         public void Delete(int ID)
@@ -39,28 +39,13 @@ namespace Negocio
 
         public void Save(Libros libro)
         {
-            LibroData.Save(libro);
+            LibroData.Insert(libro);
         }
         
-        public List<Libros> GetAllXAutor(int idAutor)
+        public List<Libros> GetAllXAutor(int idAutor, int idUsr)
         {
-            return LibroData.GetAllXAutor(idAutor);
+            return LibroData.GetAllXAutor(idAutor,idUsr);
         }
 
-        public int DameIndex(int idLibro)
-        {
-            List<Libros> libros = LibroData.GetAll();
-            int i = 0;
-            int ind = 0;
-            foreach (Libros lib in libros)
-            {
-                if (lib.IdLibro == idLibro)
-                {
-                    ind = i;
-                }
-                ++i;
-            }
-            return ind;
-        }
     }
 }

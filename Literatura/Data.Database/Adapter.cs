@@ -25,7 +25,7 @@ namespace Data.Database
             //throw new Exception("Metodo no implementado");
             try
             {
-                string conn = "Data Source=FLORR;Initial Catalog=Literatura;Integrated Security=True";
+                string conn = "Data Source=literatura.mssql.somee.com;User ID=alvfacundo_SQLLogin_1;Password=dx38ekawxh";
 
                 sqlConn = new SqlConnection(conn);
 
@@ -36,8 +36,6 @@ namespace Data.Database
                 Exception ExcepcionManejada = new Exception(ex.Message, ex);
                 throw ExcepcionManejada;
             }
-
-
         }
 
         protected void CloseConnection()

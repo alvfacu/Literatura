@@ -24,6 +24,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
+    <AutorunEnabled>true</AutorunEnabled>
     <ApplicationRevision>3</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
@@ -63,11 +64,12 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -108,11 +110,23 @@
     <Compile Include="formLibros.Designer.cs">
       <DependentUpon>formLibros.cs</DependentUpon>
     </Compile>
+    <Compile Include="formLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formLogin.Designer.cs">
+      <DependentUpon>formLogin.cs</DependentUpon>
+    </Compile>
     <Compile Include="formPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="formPrincipal.Designer.cs">
       <DependentUpon>formPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formUsuario.Designer.cs">
+      <DependentUpon>formUsuario.cs</DependentUpon>
     </Compile>
     <Compile Include="Frase.cs">
       <SubType>Form</SubType>
@@ -128,6 +142,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Usuarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Usuarios.Designer.cs">
+      <DependentUpon>Usuarios.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Autor.resx">
       <DependentUpon>Autor.cs</DependentUpon>
     </EmbeddedResource>
@@ -140,8 +160,14 @@
     <EmbeddedResource Include="formLibros.resx">
       <DependentUpon>formLibros.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="formLogin.resx">
+      <DependentUpon>formLogin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="formPrincipal.resx">
       <DependentUpon>formPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formUsuario.resx">
+      <DependentUpon>formUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Frase.resx">
       <DependentUpon>Frase.cs</DependentUpon>
@@ -151,24 +177,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
+    <EmbeddedResource Include="Usuarios.resx">
+      <DependentUpon>Usuarios.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="UI.Desktop_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entidades\Entidades.csproj">
@@ -185,6 +214,17 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Document-Copy-icon.png" />
+    <None Include="Resources\books-icon.png" />
+    <None Include="Resources\ali-land-five-books-788x306.jpg" />
+    <None Include="Resources\636086969783216903-1953168930_Books_ss_1920.png" />
+    <None Include="Resources\eye-icon.png" />
+    <None Include="Resources\Reset-icon1.png" />
+    <None Include="Resources\Actions-user-group-new-icon.png" />
+    <None Include="Resources\edit-icon1.png" />
+    <None Include="Resources\Zoom-icon2.png" />
+    <None Include="Resources\Actions-edit-delete-icon.png" />
+    <None Include="Resources\Actions-dialog-ok-apply-icon.png" />
     <Content Include="Itzikgur-My-Seven-Books-1.ico" />
   </ItemGroup>
   <ItemGroup>

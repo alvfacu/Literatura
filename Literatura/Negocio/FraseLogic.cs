@@ -22,14 +22,14 @@ namespace Negocio
             set { _FraseData = value; }
         }
 
-        public List<Frases> GetAll()
+        public List<Frases> GetAll(int idUsr)
         {
-            return FraseData.GetAll();
+            return FraseData.GetAll(idUsr);
         }
 
-        public Frases GetOne(int ID)
+        public Frases GetOne(int ID, int idUsr)
         {
-            return FraseData.GetOne(ID);
+            return FraseData.GetOne(ID, idUsr);
         }
 
         public void Delete(int ID)
@@ -39,17 +39,22 @@ namespace Negocio
 
         public void Save(Frases frase)
         {
-            FraseData.Save(frase);
+            FraseData.Insert(frase);
         }
 
-        public List<Frases> GetAllXAutor(int idAutor)
+        public void Update(Frases frase)
         {
-            return FraseData.GetAllXAutor(idAutor);
+            FraseData.Update(frase);
+        }
+        
+        public List<Frases> GetAllXLibro(int idLibro, int idUsr)
+        {
+            return FraseData.GetAllXLibro(idLibro,idUsr);
         }
 
-        public List<Frases> GetAllXLibro(int idLibro)
+        public List<Frases> GetAllXAutor(int idAutor, int idUsr)
         {
-            return FraseData.GetAllXLibro(idLibro);
+            return FraseData.GetAllXAutor(idAutor, idUsr);
         }
     }
 }

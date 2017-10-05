@@ -26,7 +26,8 @@ namespace UI.Desktop.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=FACUNDO-PC;Initial Catalog=Literatura;Integrated Security=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=literatura.mssql.somee.com;User ID=alvfacundo_SQLLogin_1;Password=dx3" +
+            "8ekawxh")]
         public string Conexion {
             get {
                 return ((string)(this["Conexion"]));

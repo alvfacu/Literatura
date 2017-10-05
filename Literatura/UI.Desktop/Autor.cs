@@ -35,24 +35,135 @@ namespace UI.Desktop
 
         private void btn_Aceptar_Click(object sender, EventArgs e)
         {
-            AutorActual = new Autores();
-            LibroActual = new Libros();
+            if (Validar())
+            {
+                try
+                {
+                    AutorActual = new Autores();
+                    AutorActual.ApyNom = txtApeNom.Text;
+                    AutorActual.IdUsuario = Program.IdUsuario;
+                    AutorActual.State = Entidades.Entidades.States.New;
+                    new AutorLogic().Save(AutorActual);
 
-            AutorActual.Completo = this.txtNomApe.Text;
-            AutorActual.State = Entidades.Entidades.States.New;
-            LibroActual.Libro = this.txtTitulo.Text;
-            LibroActual.State = Entidades.Entidades.States.New;
-            new AutorLogic().Save(AutorActual);
-            LibroActual.IdAutor = AutorActual.IdAutor;
-            LibroActual.State = Entidades.Entidades.States.New;
-            new LibroLogic().Save(LibroActual);
+                    string msj = "¡Autor creado con éxito!";
 
-            this.Close();
+                    if (chkTitulo.Checked)
+                    {
+                        LibroActual = new Libros();
+                        LibroActual.IdUsuario = Program.IdUsuario;
+                        LibroActual.Titulo = txtTitulo.Text;
+                        LibroActual.IdAutor = AutorActual.IdAutor;
+                        LibroActual.State = Entidades.Entidades.States.New;
+                        new LibroLogic().Save(LibroActual);
+
+                        msj = "¡Autor y Libro creados con éxito!";
+
+                        if (chkFrase.Checked)
+                        {
+                            Frases FraseActual = new Frases();
+                            FraseActual.IdLibro = LibroActual.IdLibro;
+                            FraseActual.IdUsuario = LibroActual.IdUsuario;
+                            FraseActual.State = Entidades.Entidades.States.New;
+                            FraseActual.Frase = txtFrase.Text;
+                            FraseActual.Pag = 0;
+                            if (!string.IsNullOrEmpty(txtPag.Text))
+                                FraseActual.Pag = Convert.ToInt32(txtPag.Text);
+
+                            new FraseLogic().Save(FraseActual);
+
+                            msj = "¡Autor, Libro y Frase creados con éxito!";
+                        }
+                    }
+
+                    MessageBox.Show(msj, "Mensaje del sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    this.Dispose();
+                    this.Close();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                
+            }
+        }
+
+        private bool Validar()
+        {
+            if (string.IsNullOrEmpty(txtApeNom.Text))
+            {
+                MessageBox.Show("¡Falta Autor!", "Mensaje del sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+
+            if(chkTitulo.Checked)
+                if (string.IsNullOrEmpty(txtTitulo.Text))
+                {
+                    MessageBox.Show("¡Falta Título del libro!", "Mensaje del sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return false;
+                }
+
+            if (chkFrase.Checked)
+            {
+                if (string.IsNullOrEmpty(txtFrase.Text))
+                {
+                    MessageBox.Show("¡Falta Frase del libro!", "Mensaje del sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return false;
+                }
+
+                int nro;
+                if (!string.IsNullOrEmpty(txtPag.Text) && !int.TryParse(txtPag.Text, out nro))
+                {
+                    MessageBox.Show("¡El nro de página posee formato incorrecto!", "Mensaje del sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         private void btn_Cancelar_Click(object sender, EventArgs e)
         {
+            this.Dispose();
             this.Close();
+        }
+
+        private void chkTitulo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkTitulo.Checked)
+            {
+                txtTitulo.Enabled = true;
+                chkFrase.Enabled = true;
+            }
+            else
+            {
+                txtTitulo.Enabled = false;
+                txtTitulo.Text = "";
+                chkFrase.Enabled = false;
+                txtFrase.Text = "";
+            }
+        }
+
+        private void chkFrase_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkFrase.Checked)
+            {
+                txtFrase.Enabled = true;
+                txtPag.Enabled = true;
+            }
+            else
+            {
+                txtFrase.Enabled = false;
+                txtFrase.Text = "";
+                txtPag.Enabled = false;
+                txtPag.Text = "";
+            }
+
+        }
+
+        private void txtFrase_TextChanged(object sender, EventArgs e)
+        {
+            lblContador.Text = txtFrase.Text.Length.ToString() + "/" + txtFrase.MaxLength;
+            lblContador.Refresh();
         }
     }
 }

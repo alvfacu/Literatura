@@ -28,67 +28,77 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formLibros));
-            this.dvg_Libros = new System.Windows.Forms.DataGridView();
-            this.titulo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.autor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dvg_Libros)).BeginInit();
+            this.dgv_Libros = new System.Windows.Forms.DataGridView();
+            this.btnVerFrases = new System.Windows.Forms.Button();
+            this.btnCerrar = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Libros)).BeginInit();
             this.SuspendLayout();
             // 
-            // dvg_Libros
+            // dgv_Libros
             // 
-            this.dvg_Libros.AllowUserToAddRows = false;
-            this.dvg_Libros.AllowUserToDeleteRows = false;
-            this.dvg_Libros.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dvg_Libros.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.titulo,
-            this.autor});
-            this.dvg_Libros.Location = new System.Drawing.Point(12, 12);
-            this.dvg_Libros.Name = "dvg_Libros";
-            this.dvg_Libros.ReadOnly = true;
-            this.dvg_Libros.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dvg_Libros.Size = new System.Drawing.Size(557, 288);
-            this.dvg_Libros.TabIndex = 0;
+            this.dgv_Libros.AllowUserToAddRows = false;
+            this.dgv_Libros.AllowUserToDeleteRows = false;
+            this.dgv_Libros.AllowUserToResizeRows = false;
+            this.dgv_Libros.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_Libros.Location = new System.Drawing.Point(12, 12);
+            this.dgv_Libros.Name = "dgv_Libros";
+            this.dgv_Libros.ReadOnly = true;
+            this.dgv_Libros.RowHeadersVisible = false;
+            this.dgv_Libros.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgv_Libros.Size = new System.Drawing.Size(503, 288);
+            this.dgv_Libros.TabIndex = 0;
+            this.dgv_Libros.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dvg_Libros_CellDoubleClick);
             // 
-            // titulo
+            // btnVerFrases
             // 
-            this.titulo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.titulo.DataPropertyName = "Libro";
-            this.titulo.HeaderText = "Nombre del libro";
-            this.titulo.Name = "titulo";
-            this.titulo.ReadOnly = true;
-            this.titulo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.btnVerFrases.Image = ((System.Drawing.Image)(resources.GetObject("btnVerFrases.Image")));
+            this.btnVerFrases.Location = new System.Drawing.Point(521, 12);
+            this.btnVerFrases.Name = "btnVerFrases";
+            this.btnVerFrases.Size = new System.Drawing.Size(40, 35);
+            this.btnVerFrases.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.btnVerFrases, "Ver Frases");
+            this.btnVerFrases.UseVisualStyleBackColor = true;
+            this.btnVerFrases.Click += new System.EventHandler(this.btnVerFrases_Click);
             // 
-            // autor
+            // btnCerrar
             // 
-            this.autor.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.autor.DataPropertyName = "Autor";
-            this.autor.HeaderText = "Autor";
-            this.autor.Name = "autor";
-            this.autor.ReadOnly = true;
-            this.autor.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.btnCerrar.Image = global::UI.Desktop.Properties.Resources.Actions_edit_delete_icon;
+            this.btnCerrar.Location = new System.Drawing.Point(522, 54);
+            this.btnCerrar.Name = "btnCerrar";
+            this.btnCerrar.Size = new System.Drawing.Size(40, 35);
+            this.btnCerrar.TabIndex = 2;
+            this.toolTip1.SetToolTip(this.btnCerrar, "Cerrar");
+            this.btnCerrar.UseVisualStyleBackColor = true;
+            this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
             // 
             // formLibros
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(581, 312);
-            this.Controls.Add(this.dvg_Libros);
+            this.ClientSize = new System.Drawing.Size(571, 312);
+            this.Controls.Add(this.btnCerrar);
+            this.Controls.Add(this.btnVerFrases);
+            this.Controls.Add(this.dgv_Libros);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "formLibros";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Libros";
-            ((System.ComponentModel.ISupportInitialize)(this.dvg_Libros)).EndInit();
+            this.Text = "Libros cargados";
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Libros)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dvg_Libros;
-        private System.Windows.Forms.DataGridViewTextBoxColumn titulo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn autor;
+        private System.Windows.Forms.DataGridView dgv_Libros;
+        private System.Windows.Forms.Button btnVerFrases;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button btnCerrar;
     }
 }

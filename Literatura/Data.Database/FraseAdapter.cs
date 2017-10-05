@@ -10,7 +10,7 @@ namespace Data.Database
 {
     public class FraseAdapter : Adapter
     {
-        public List<Frases> GetAll()
+        public List<Frases> GetAll(int idUsr)
         {
             List<Frases> frases = new List<Frases>();
 
@@ -18,8 +18,8 @@ namespace Data.Database
             {
                 this.OpenConnection();                              
 
-                SqlCommand cmdFrases = new SqlCommand("SELECT au.nombreApellido as nombre, au.idAutor as idAutor, lib.titulo as titulo, lib.idLibro as idLibro, fr.idFrase as idFrase, fr.texto as frase"
-                    + " FROM [Frases] fr INNER JOIN [Libros] lib ON fr.idLibro = lib.idLibro INNER JOIN [Autores] au ON lib.idAutor = au.idAutor ORDER BY 1 , 3", sqlConn);
+                SqlCommand cmdFrases = new SqlCommand("SELECT * FROM [dbo].[frases] WHERE idUsuario=@idUsr", sqlConn);
+                cmdFrases.Parameters.AddWithValue("@idUsr", idUsr);
                 cmdFrases.CommandType = CommandType.Text;
 
                 SqlDataReader drFrases = cmdFrases.ExecuteReader();
@@ -28,12 +28,10 @@ namespace Data.Database
                 {
                     Frases fr = new Frases();
                     fr.IdFrase = (int)drFrases["idFrase"];
-                    fr.IdAutor = (int)drFrases["idAutor"];
                     fr.IdLibro = (int)drFrases["idLibro"];
-                    fr.Libro = (string)drFrases["titulo"];
-                    fr.Autor = (string)drFrases["nombre"];
-                    fr.Fragmento = (string)drFrases["frase"];
-
+                    fr.Frase = (string)drFrases["frase"];
+                    fr.IdUsuario = (int)drFrases["idUsuario"];
+                    fr.Pag = (int)drFrases["pagina"];
                     frases.Add(fr);
                 }
 
@@ -53,7 +51,7 @@ namespace Data.Database
             return frases;
         }
 
-        public List<Frases> GetAllXLibro(int idLibro)
+        public List<Frases> GetAllXLibro(int idLibro, int idUsr)
         {
             List<Frases> frases = new List<Frases>();
 
@@ -61,9 +59,9 @@ namespace Data.Database
             {
                 this.OpenConnection();
 
-                SqlCommand cmdFrases = new SqlCommand("SELECT au.nombreApellido as nombre, au.idAutor as idAutor, lib.titulo as titulo, lib.idLibro as idLibro, fr.idFrase as idFrase, fr.texto as frase"
-                    + " FROM [Frases] fr INNER JOIN [Libros] lib ON fr.idLibro = lib.idLibro INNER JOIN [Autores] au ON lib.idAutor = au.idAutor WHERE lib.idLibro = @id", sqlConn);
-                cmdFrases.Parameters.Add("@id", SqlDbType.Int).Value = idLibro;
+                SqlCommand cmdFrases = new SqlCommand("SELECT * FROM [dbo].[frases] WHERE idLibro=@idLib AND idUsuario=@idUsr", sqlConn);
+                cmdFrases.Parameters.AddWithValue("@idLib", idLibro);
+                cmdFrases.Parameters.AddWithValue("@idUsr", idUsr);
 
                 cmdFrases.CommandType = CommandType.Text;
 
@@ -73,12 +71,10 @@ namespace Data.Database
                 {
                     Frases fr = new Frases();
                     fr.IdFrase = (int)drFrases["idFrase"];
-                    fr.IdAutor = (int)drFrases["idAutor"];
                     fr.IdLibro = (int)drFrases["idLibro"];
-                    fr.Libro = (string)drFrases["titulo"];
-                    fr.Autor = (string)drFrases["nombre"];
-                    fr.Fragmento = (string)drFrases["frase"];
-
+                    fr.Frase = (string)drFrases["frase"];
+                    fr.IdUsuario = (int)drFrases["idUsuario"];
+                    fr.Pag = (int)drFrases["pagina"];
                     frases.Add(fr);
                 }
 
@@ -98,7 +94,7 @@ namespace Data.Database
             return frases;
         }
 
-        public List<Frases> GetAllXAutor(int idAutor)
+        public List<Frases> GetAllXAutor(int idAutor, int idUsr)
         {
             List<Frases> frases = new List<Frases>();
 
@@ -106,9 +102,12 @@ namespace Data.Database
             {
                 this.OpenConnection();
 
-                SqlCommand cmdFrases = new SqlCommand("SELECT au.nombreApellido as nombre, au.idAutor as idAutor, lib.titulo as titulo, lib.idLibro as idLibro, fr.idFrase as idFrase, fr.texto as frase"
-                    + " FROM [Frases] fr INNER JOIN [Libros] lib ON fr.idLibro = lib.idLibro INNER JOIN [Autores] au ON lib.idAutor = au.idAutor WHERE au.idAutor = @id ORDER BY 1,3", sqlConn);
-                cmdFrases.Parameters.Add("@id", SqlDbType.Int).Value = idAutor;
+                SqlCommand cmdFrases = new SqlCommand("SELECT fr.* FROM [dbo].[frases] as fr"+
+                    " INNER JOIN [dbo].[libros] as lib ON fr.idLibro=lib.idLibro"+
+                    " INNER JOIN [dbo].[autores] as au ON au.idAutor=lib.idAutor"+
+                    " WHERE au.idAutor=@idAu AND lib.idUsuario=@idUsr", sqlConn);
+                cmdFrases.Parameters.AddWithValue("@idAu", idAutor);
+                cmdFrases.Parameters.AddWithValue("@idUsr", idUsr);
 
                 cmdFrases.CommandType = CommandType.Text;
 
@@ -118,12 +117,10 @@ namespace Data.Database
                 {
                     Frases fr = new Frases();
                     fr.IdFrase = (int)drFrases["idFrase"];
-                    fr.IdAutor = (int)drFrases["idAutor"];
                     fr.IdLibro = (int)drFrases["idLibro"];
-                    fr.Libro = (string)drFrases["titulo"];
-                    fr.Autor = (string)drFrases["nombre"];
-                    fr.Fragmento = (string)drFrases["frase"];
-
+                    fr.Frase = (string)drFrases["frase"];
+                    fr.IdUsuario = (int)drFrases["idUsuario"];
+                    fr.Pag = (int)drFrases["pagina"];
                     frases.Add(fr);
                 }
 
@@ -143,7 +140,7 @@ namespace Data.Database
             return frases;
         }
 
-        public Frases GetOne(int ID)
+        public Frases GetOne(int ID, int idUsr)
         {
             Frases frase = new Frases();
 
@@ -151,20 +148,19 @@ namespace Data.Database
             {
                 this.OpenConnection();
 
-                SqlCommand cmdFrase = new SqlCommand("SELECT au.nombreApellido as nombre, au.idAutor as idAutor, lib.titulo as titulo, lib.idLibro as idLibro, fr.idFrase as idFrase, fr.texto as frase"
-                    + " FROM [Frases] fr INNER JOIN [Libros] lib ON fr.idLibro = lib.idLibro INNER JOIN [Autores] au ON lib.idAutor = au.idAutor WHERE fr.idFrase = @id", sqlConn);
-                cmdFrase.Parameters.Add("@id", SqlDbType.Int).Value = ID;
+                SqlCommand cmdFrase = new SqlCommand("SELECT * FROM [dbo].[frases] WHERE idFrase=@idFrase AND idUsuario=@idUsuario", sqlConn);
+                cmdFrase.Parameters.AddWithValue("@idFrase", ID);
+                cmdFrase.Parameters.AddWithValue("@idUsuario", idUsr);
 
                 SqlDataReader drFrase = cmdFrase.ExecuteReader();
 
                 if (drFrase.Read())
                 {
                     frase.IdFrase = (int)drFrase["idFrase"];
-                    frase.IdAutor = (int)drFrase["idAutor"];
                     frase.IdLibro = (int)drFrase["idLibro"];
-                    frase.Libro = (string)drFrase["titulo"];
-                    frase.Autor = (string)drFrase["nombre"];
-                    frase.Fragmento = (string)drFrase["frase"];
+                    frase.Frase = (string)drFrase["frase"];
+                    frase.IdUsuario = (int)drFrase["idUsuario"];
+                    frase.Pag = (int)drFrase["pagina"];
                 }
 
                 drFrase.Close();
@@ -205,18 +201,20 @@ namespace Data.Database
             }
         }
 
-        protected void Insert(Frases fr)
+        public void Insert(Frases fr)
         {
             try
             {
                 this.OpenConnection();
 
-                SqlCommand cmdSave = new SqlCommand("INSERT INTO [Frases](idLibro,texto) " +
-                    "VALUES(@idLibro,@texto) " +
+                SqlCommand cmdSave = new SqlCommand("INSERT INTO [dbo].[frases](idLibro,frase,idUsuario,pagina) " +
+                    "VALUES(@idLibro,@texto,@idUsr,@pagina) " +
                     "SELECT @@identity", //esta linea es para recuperar el ID que asignó el SQL automaticamente
                     sqlConn);
-                cmdSave.Parameters.Add("@idLibro", SqlDbType.Int).Value = fr.IdLibro;
-                cmdSave.Parameters.Add("@texto", SqlDbType.VarChar, 1000).Value = fr.Fragmento;
+                cmdSave.Parameters.AddWithValue("@idLibro", fr.IdLibro);
+                cmdSave.Parameters.AddWithValue("@idUsr", fr.IdUsuario);
+                cmdSave.Parameters.AddWithValue("@texto", fr.Frase);
+                cmdSave.Parameters.AddWithValue("@pagina", fr.Pag);
                 fr.IdFrase = Decimal.ToInt32((decimal)cmdSave.ExecuteScalar()); 
             }
             catch (Exception Ex)
@@ -231,16 +229,18 @@ namespace Data.Database
             }
         }
 
-        protected void Update(Frases frase)
+        public void Update(Frases frase)
         {
             try
             {
                 this.OpenConnection();
 
-                SqlCommand cmdSave = new SqlCommand("UPDATE [Frases] SET idLibro=@idLibro, texto=@texto WHERE idFrase=@idFrase", sqlConn);
-                cmdSave.Parameters.Add("@idFrase", SqlDbType.Int).Value = frase.IdFrase;
-                cmdSave.Parameters.Add("@idLibro", SqlDbType.Int).Value = frase.IdLibro;
-                cmdSave.Parameters.Add("@texto", SqlDbType.VarChar, 1000).Value = frase.Fragmento;
+                SqlCommand cmdSave = new SqlCommand("UPDATE [dbo].[frases] SET idLibro=@idLibro, frase=@texto, pagina=@pag WHERE idFrase=@idFrase AND idUsuario=@idUsuario", sqlConn);
+                cmdSave.Parameters.AddWithValue("@idLibro", frase.IdLibro);
+                cmdSave.Parameters.AddWithValue("@texto", frase.Frase);
+                cmdSave.Parameters.AddWithValue("@idFrase", frase.IdFrase);
+                cmdSave.Parameters.AddWithValue("@idUsuario", frase.IdUsuario);
+                cmdSave.Parameters.AddWithValue("@pag", frase.Pag);
 
                 cmdSave.ExecuteReader();
             }
@@ -255,21 +255,6 @@ namespace Data.Database
             }
         }
 
-        public void Save(Frases frase)
-        {
-            if (frase.State == Entidades.Entidades.States.Deleted)
-            {
-                this.Delete(frase.IdFrase);
-            }
-            else if (frase.State == Entidades.Entidades.States.New)
-            {
-                this.Insert(frase);
-            }
-            else if (frase.State == Entidades.Entidades.States.Modified)
-            {
-                this.Update(frase);
-            }
-            frase.State = Entidades.Entidades.States.Unmodified;
-        }
+        
     }
 }

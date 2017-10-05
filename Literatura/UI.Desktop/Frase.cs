@@ -15,6 +15,9 @@ namespace UI.Desktop
     {
         private Frases _frActual;
         private Entidades.Entidades.States _modo;
+        private List<Autores> autores;
+        private List<Libros> libros;
+        private bool bnd = true;
 
         public Entidades.Entidades.States Modo
         {
@@ -37,8 +40,10 @@ namespace UI.Desktop
         {
             InitializeComponent();
             CargarListas();
-            FrActual = new FraseLogic().GetOne(ID);
-            this.txtFrase.Text = FrActual.Fragmento;
+            FrActual = new FraseLogic().GetOne(ID,Program.IdUsuario);
+            this.txtFrase.Text = FrActual.Frase;
+            this.cmbAutores.SelectedValue = new LibroLogic().GetOne(FrActual.IdLibro, FrActual.IdUsuario).IdAutor;
+            this.cmbLibros.SelectedValue = FrActual.IdLibro;
         }
 
         public Frase(int ID, Entidades.Entidades.States estado)
@@ -48,25 +53,13 @@ namespace UI.Desktop
             Modo = estado;
             if (ID != 0)
             {
-                FrActual = new FraseLogic().GetOne(ID);
+                FrActual = new FraseLogic().GetOne(ID,Program.IdUsuario);
             }
-            this.cmbLibros.SelectedIndex = -1;
             switch (Modo)
             {
-                case (Entidades.Entidades.States.New):
-                    {
-                        this.btn_Aceptar.Text = "Guardar";
-                        break;
-                    }
-                case (Entidades.Entidades.States.Deleted):
-                    {
-                        this.btn_Aceptar.Text = "Eliminar";
-                        break;
-                    }
                 case (Entidades.Entidades.States.Modified):
                     {
                         RellenarFormulario();
-                        this.btn_Aceptar.Text = "Modificar";
                         break;
                     }
                 default: break;
@@ -75,65 +68,130 @@ namespace UI.Desktop
 
         private void RellenarFormulario()
         {
-            this.cmbAutores.SelectedIndex = new AutorLogic().DameIndex(FrActual.IdAutor);
-            CargarLibros();
-            this.cmbLibros.SelectedIndex = new LibroLogic().DameIndex(FrActual.IdLibro);
-            this.txtFrase.Text = FrActual.Fragmento;
+            this.cmbAutores.SelectedValue = new LibroLogic().GetOne(FrActual.IdLibro, FrActual.IdUsuario).IdAutor;
+            this.cmbLibros.SelectedValue = FrActual.IdLibro;
+            this.txtFrase.Text = FrActual.Frase;
+            this.txtPag.Text = FrActual.Pag.ToString();
         }
 
         private void CargarListas()
         {
-            this.cmbAutores.DataSource = new AutorLogic().GetAll();
-            this.cmbAutores.DisplayMember = "completo";
-            CargarLibros();
-        }
+            autores = new AutorLogic().GetAll(Program.IdUsuario);
+            this.cmbAutores.DataSource = autores;
+            this.cmbAutores.DisplayMember = "apynom";
+            this.cmbAutores.ValueMember = "idAutor";
+            this.cmbAutores.SelectedIndex = -1;
 
-        private void CargarLibros()
-        {
-            this.cmbLibros.DataSource = new LibroLogic().GetAll();
-            this.cmbLibros.DisplayMember = "libro";
+            libros = new LibroLogic().GetAll(Program.IdUsuario);
+            this.cmbLibros.DataSource = libros;
+            this.cmbLibros.DisplayMember = "titulo";
+            this.cmbLibros.ValueMember = "idLibro";
+            this.cmbLibros.SelectedIndex = -1;
         }
-
-        private void cmbAutores_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            this.cmbLibros.DataSource = new LibroLogic().GetAllXAutor(((Entidades.Autores)this.cmbAutores.SelectedValue).IdAutor);
-            this.cmbLibros.DisplayMember = "libro";
-        }
-
+        
         private void btn_Aceptar_Click(object sender, EventArgs e)
-        {
-            switch (Modo)
+        { 
+            if (Validar())
             {
-                case (Entidades.Entidades.States.New):
-                    {
-                        FrActual = new Frases();
-                        FrActual.IdLibro = ((Entidades.Libros)this.cmbLibros.SelectedValue).IdLibro;
-                        FrActual.Fragmento = this.txtFrase.Text;
-                        FrActual.State = Modo;
-                        new FraseLogic().Save(FrActual);
-                        break;
-                    }
-                case (Entidades.Entidades.States.Deleted):
-                    {
-                        this.btn_Aceptar.Text = "Eliminar";
-                        break;
-                    }
-                case (Entidades.Entidades.States.Modified):
-                    {
-                        FrActual.IdLibro = ((Entidades.Libros)this.cmbLibros.SelectedValue).IdLibro;
-                        FrActual.Fragmento = this.txtFrase.Text;
-                        FrActual.State = Modo;
-                        new FraseLogic().Save(FrActual);
-                        break;
-                    }
-                default: break;
+                switch (Modo)
+                {
+                    case (Entidades.Entidades.States.New):
+                        {
+                            FrActual = new Frases();
+                            FrActual.IdLibro = Convert.ToInt32(cmbLibros.SelectedValue);
+                            FrActual.Frase = txtFrase.Text;
+                            FrActual.IdUsuario = Program.IdUsuario;
+                            FrActual.State = Modo;
+                            FrActual.Pag = 0;
+                            if (!string.IsNullOrEmpty(txtPag.Text))
+                                FrActual.Pag = Convert.ToInt32(txtPag.Text);
+                            new FraseLogic().Save(FrActual);
+                            break;
+                        }
+                    case (Entidades.Entidades.States.Modified):
+                        {
+                            FrActual.IdLibro = Convert.ToInt32(cmbLibros.SelectedValue);
+                            FrActual.Frase = this.txtFrase.Text;
+                            FrActual.State = Modo;
+                            FrActual.Pag = 0;
+                            if (!string.IsNullOrEmpty(txtPag.Text))
+                                FrActual.Pag = Convert.ToInt32(txtPag.Text);
+                            new FraseLogic().Update(FrActual);
+                            break;
+                        }
+                    default: break;
+                }
+                this.Dispose();
+                this.Close();
+            }           
+        }
+
+        private bool Validar()
+        {
+            if (cmbAutores.SelectedIndex==-1)
+            {
+                MessageBox.Show("¡Seleccione Autor!", "Mensaje del sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
             }
-            this.Close();
+
+            if (cmbLibros.SelectedIndex == -1)
+            {
+                MessageBox.Show("¡Seleccione Libro!", "Mensaje del sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+
+            if(string.IsNullOrEmpty(txtFrase.Text))
+            {
+                MessageBox.Show("¡Falta Frase!", "Mensaje del sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+
+            int nro;
+            if (!string.IsNullOrEmpty(txtPag.Text) && !int.TryParse(txtPag.Text, out nro))
+            {
+                MessageBox.Show("¡El nro de página posee formato incorrecto!", "Mensaje del sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+
+            return true;
         }
 
         private void btn_Cancelar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void cmbAutores_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            if (bnd)
+            {
+                this.cmbLibros.DataSource = new LibroLogic().GetAllXAutor(Convert.ToInt32(cmbAutores.SelectedValue), Program.IdUsuario);
+                this.cmbLibros.ValueMember = "idLibro";
+                this.cmbLibros.DisplayMember = "titulo";
+                this.cmbLibros.SelectedIndex = -1;
+            }
+            else
+            {
+                bnd = true;
+            }
+        }
+
+        private void cmbLibros_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            foreach (Libros lib in libros)
+            {
+                if (lib.IdLibro == Convert.ToInt32(cmbLibros.SelectedValue))
+                {
+                    bnd = false;
+                    this.cmbAutores.SelectedValue = lib.IdAutor;
+                }
+            }
+        }
+
+        private void txtFrase_TextChanged(object sender, EventArgs e)
+        {
+            lblContador.Text = txtFrase.Text.Length.ToString() + "/" + txtFrase.MaxLength;
+            lblContador.Refresh();
         }
     }
 }

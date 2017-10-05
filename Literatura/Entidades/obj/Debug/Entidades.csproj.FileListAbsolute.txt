@@ -1,13 +1,5 @@
-E:\Literatura\Literatura\Entidades\bin\Debug\Entidades.dll
-E:\Literatura\Literatura\Entidades\bin\Debug\Entidades.pdb
-E:\Literatura\Literatura\Entidades\obj\Debug\ResolveAssemblyReference.cache
-E:\Literatura\Literatura\Entidades\obj\Debug\Entidades.dll
-E:\Literatura\Literatura\Entidades\obj\Debug\Entidades.pdb
-C:\Users\Facundo\Desktop\Net\Literatura\Literatura\Entidades\bin\Debug\Entidades.dll
-C:\Users\Facundo\Desktop\Net\Literatura\Literatura\Entidades\bin\Debug\Entidades.pdb
-C:\Users\Facundo\Desktop\Net\Literatura\Literatura\Entidades\obj\Debug\Entidades.dll
-C:\Users\Facundo\Desktop\Net\Literatura\Literatura\Entidades\obj\Debug\Entidades.pdb
 C:\Users\Facundo\Documents\NET\Literatura\Literatura\Entidades\bin\Debug\Entidades.dll
 C:\Users\Facundo\Documents\NET\Literatura\Literatura\Entidades\bin\Debug\Entidades.pdb
+C:\Users\Facundo\Documents\NET\Literatura\Literatura\Entidades\obj\Debug\Entidades.csprojResolveAssemblyReference.cache
 C:\Users\Facundo\Documents\NET\Literatura\Literatura\Entidades\obj\Debug\Entidades.dll
 C:\Users\Facundo\Documents\NET\Literatura\Literatura\Entidades\obj\Debug\Entidades.pdb

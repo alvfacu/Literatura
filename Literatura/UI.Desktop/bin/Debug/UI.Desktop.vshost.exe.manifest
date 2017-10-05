@@ -43,62 +43,62 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Data.Database.dll" size="15360">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Data.Database.dll" size="17920">
       <assemblyIdentity name="Data.Database" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>3ATf7mGO66Iuyi5oCXRoDGp7UOE=</dsig:DigestValue>
+        <dsig:DigestValue>8ELC5WZ1AqAZiaCoMidszArhgA4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Entidades.dll" size="6656">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Entidades.dll" size="7168">
       <assemblyIdentity name="Entidades" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>/04uYbnr1a/llSh+c0p+MJafeXc=</dsig:DigestValue>
+        <dsig:DigestValue>PMTDoVE1+MtEvdsv1W+qZ/1X4ko=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Negocio.dll" size="7168">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Negocio.dll" size="7680">
       <assemblyIdentity name="Negocio" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>zHKpjMVgIbkLMF+PRNkPsG3CcGY=</dsig:DigestValue>
+        <dsig:DigestValue>i232nPZK1+tRwyT90u5q/T2h9LY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="UI.Desktop.exe" size="1988008">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="UI.Desktop.exe" size="5355008">
       <assemblyIdentity name="UI.Desktop" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>5uFLk7QiHRCcEKX1U81E+1EFzXo=</dsig:DigestValue>
+        <dsig:DigestValue>h2jy7bHelJdiuNZXFW9VNibGHVo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Util.dll" size="4608">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Util.dll" size="5632">
       <assemblyIdentity name="Util" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>DZrGy5fMu+KBiLYanOvRAA/Zt+o=</dsig:DigestValue>
+        <dsig:DigestValue>wmoQxf9+FNUkvW6BaWcRHgPDoeE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -111,13 +111,13 @@
       <dsig:DigestValue>8TNoAezOpOzRE6g6YlYya+OrFxg=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="UI.Desktop.exe.config" size="381">
+  <file name="UI.Desktop.exe.config" size="395">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>hl17+bCBM68l/G6ZGtKvWQMO+/w=</dsig:DigestValue>
+      <dsig:DigestValue>ERC6ikBtATKxPCn2ypKszREwltM=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

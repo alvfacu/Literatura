@@ -22,35 +22,19 @@ namespace Negocio
             set { _AutorData = value; }
         }
 
-        public List<Autores> GetAll()
+        public List<Autores> GetAll(int idUsr)
         {
-            return AutorData.GetAll();
+            return AutorData.GetAll(idUsr);
         }
 
-        public Autores GetOne(int ID)
+        public Autores GetOne(int ID,int idUsr)
         {
-            return AutorData.GetOne(ID);
+            return AutorData.GetOne(ID,idUsr);
         }
         
         public void Save(Autores autor)
         {
-            AutorData.Save(autor);
-        }
-
-        public int DameIndex(int idAutor)
-        {
-            List<Autores> autores = AutorData.GetAll();
-            int i = 0;
-            int ind = 0;
-            foreach (Autores au in autores)
-            {
-                if(au.IdAutor == idAutor)
-                {
-                    ind = i;
-                }
-                ++i;
-            }
-            return ind;
+            AutorData.Insert(autor);
         }
     }
 }

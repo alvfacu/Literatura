@@ -50,6 +50,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="UsuarioLogic.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Data.Database\Data.Database.csproj">
@@ -59,6 +60,10 @@
     <ProjectReference Include="..\Entidades\Entidades.csproj">
       <Project>{F193B69D-5814-4F5F-9B6A-8323C8BAAAF4}</Project>
       <Name>Entidades</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Util\Util.csproj">
+      <Project>{b30be6c5-7001-4b4a-984c-e775aad0f8b1}</Project>
+      <Name>Util</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

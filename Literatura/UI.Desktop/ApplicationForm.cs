@@ -15,7 +15,7 @@ namespace UI.Desktop
 
         public enum ModoForm { Alta, Baja, Modificacion, Consulta };
         private ModoForm _modo;
-
+        private int _idUsr;
         #endregion
 
         #region Constructores
@@ -35,25 +35,13 @@ namespace UI.Desktop
             set { _modo = value; }
         }
 
-        #endregion
-
-        #region Metodos
-
-        public virtual void MapearDeDatos() { }
-        public virtual void MapearADatos() { }
-        public virtual void GuardarCambios() { }
-        public virtual bool Validar() { return false; }
-
-        public void Notificar(string titulo, string mensaje, MessageBoxButtons botones, MessageBoxIcon icono)
+        public int IdUsuario
         {
-            MessageBox.Show(mensaje, titulo, botones, icono);
-        }
-
-        public void Notificar(string mensaje, MessageBoxButtons botones, MessageBoxIcon icono)
-        {
-            this.Notificar(this.Text, mensaje, botones, icono);
+            get { return _idUsr; }
+            set { _idUsr = value; }
         }
 
         #endregion
+
     }
 }

@@ -9,7 +9,7 @@ namespace Data.Database
 {
     public class AutorAdapter : Adapter
     {
-        public List<Autores> GetAll()
+        public List<Autores> GetAll(int idUsr)
         {
             List<Autores> autores = new List<Autores>();
 
@@ -17,7 +17,8 @@ namespace Data.Database
             {
                 this.OpenConnection();
 
-                SqlCommand cmdAutores = new SqlCommand("SELECT au.idAutor as id, au.nombreApellido as completo FROM [Autores] au ORDER BY 2", sqlConn);
+                SqlCommand cmdAutores = new SqlCommand("SELECT * FROM dbo.autores WHERE idUsuario=@idUsr ORDER BY apynom", sqlConn);
+                cmdAutores.Parameters.AddWithValue("@idUsr", idUsr);
                 cmdAutores.CommandType = CommandType.Text;
 
                 SqlDataReader drAutores = cmdAutores.ExecuteReader();
@@ -25,8 +26,9 @@ namespace Data.Database
                 while (drAutores.Read())
                 {
                     Autores au = new Autores();
-                    au.Completo = (string)drAutores["completo"];
-                    au.IdAutor = (int)drAutores["id"];
+                    au.ApyNom = (string)drAutores["apynom"];
+                    au.IdAutor = (int)drAutores["idAutor"];
+                    au.IdUsuario = (int)drAutores["idUsuario"];
                     autores.Add(au);
                 }
 
@@ -46,9 +48,43 @@ namespace Data.Database
             return autores;
         }
 
-        public Autores GetOne(int ID)
+        public Autores GetOne(int ID, int idUsr)
         {
-            return null;
+            Autores au = null;
+
+            try
+            {
+                this.OpenConnection();
+
+                SqlCommand cmdLibros = new SqlCommand("SELECT * FROM [dbo].[autores] WHERE idAutor = @idAu AND idUsuario=@idUsr", sqlConn);
+                cmdLibros.Parameters.AddWithValue("@idAu", ID);
+                cmdLibros.Parameters.AddWithValue("@idUsr", idUsr);
+
+                cmdLibros.CommandType = CommandType.Text;
+
+                SqlDataReader drAutor = cmdLibros.ExecuteReader();
+
+                if(drAutor.Read())
+                {
+                    au = new Autores();
+                    au.ApyNom = (string)drAutor["apynom"];
+                    au.IdAutor = (int)drAutor["idAutor"];
+                }
+
+                drAutor.Close();
+            }
+            catch (Exception Ex)
+            {
+                Exception ExcepcionManejada =
+                new Exception(Ex.Message, Ex);
+                throw ExcepcionManejada;
+            }
+            finally
+            {
+                this.CloseConnection();
+            }
+
+            return au;
         }
 
         public void Delete(Autores autor)
@@ -62,18 +98,19 @@ namespace Data.Database
             {
                 this.OpenConnection();
 
-                SqlCommand cmdSave = new SqlCommand("INSERT INTO [Autores](nombreApellido) " +
-                    "VALUES(@nombreApellido) " +
+                SqlCommand cmdSave = new SqlCommand("INSERT INTO dbo.Autores (apynom,idUsuario) " +
+                    "VALUES (@apnombre,@idusr) " +
                     "SELECT @@identity", //esta linea es para recuperar el ID que asignó el SQL automaticamente
                     sqlConn);
-                cmdSave.Parameters.Add("@nombreApellido", SqlDbType.VarChar, 50).Value = autor.Completo;
+                cmdSave.Parameters.AddWithValue("@apnombre", autor.ApyNom);
+                cmdSave.Parameters.AddWithValue("@idUsr", autor.IdUsuario);
                 autor.IdAutor = Decimal.ToInt32((decimal)cmdSave.ExecuteScalar());
             }
             catch (Exception Ex)
             {
                 Console.WriteLine(Ex.Message);
-                Exception ExcepcionManejada = new Exception("Error al crear Autor", Ex);
-                throw ExcepcionManejada;
+                //Exception ExcepcionManejada = new Exception("Error al crear Autor", Ex);
+                //throw ExcepcionManejada;
             }
             finally
             {
@@ -85,22 +122,6 @@ namespace Data.Database
         {
 
         }
-
-        public void Save(Autores autor)
-        {
-            if (autor.State == Entidades.Entidades.States.Deleted)
-            {
-                this.Delete(autor);
-            }
-            else if (autor.State == Entidades.Entidades.States.New)
-            {
-                this.Insert(autor);
-            }
-            else if (autor.State == Entidades.Entidades.States.Modified)
-            {
-                this.Update(autor);
-            }
-            autor.State = Entidades.Entidades.States.Unmodified;
-        }
+        
     }
 }
