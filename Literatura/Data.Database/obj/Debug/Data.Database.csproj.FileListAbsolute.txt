@@ -1,9 +1,0 @@
-C:\Users\Facundo\Documents\NET\Literatura\Literatura\Data.Database\bin\Debug\Data.Database.dll
-C:\Users\Facundo\Documents\NET\Literatura\Literatura\Data.Database\bin\Debug\Data.Database.pdb
-C:\Users\Facundo\Documents\NET\Literatura\Literatura\Data.Database\bin\Debug\Entidades.dll
-C:\Users\Facundo\Documents\NET\Literatura\Literatura\Data.Database\bin\Debug\Util.dll
-C:\Users\Facundo\Documents\NET\Literatura\Literatura\Data.Database\bin\Debug\Entidades.pdb
-C:\Users\Facundo\Documents\NET\Literatura\Literatura\Data.Database\bin\Debug\Util.pdb
-C:\Users\Facundo\Documents\NET\Literatura\Literatura\Data.Database\obj\Debug\Data.Database.csprojResolveAssemblyReference.cache
-C:\Users\Facundo\Documents\NET\Literatura\Literatura\Data.Database\obj\Debug\Data.Database.dll
-C:\Users\Facundo\Documents\NET\Literatura\Literatura\Data.Database\obj\Debug\Data.Database.pdb

@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<configuration>
-    <configSections>
-    </configSections>
-    <connectionStrings>
-        <add name="UI.Desktop.Properties.Settings.Conexion" connectionString="Data Source=literatura.mssql.somee.com;User ID=alvfacundo_SQLLogin_1;Password=dx38ekawxh"
-            providerName="System.Data.SqlClient" />
-    </connectionStrings>
-</configuration>
